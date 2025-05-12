@@ -3,8 +3,8 @@
 ## Exercice 1
 
 ### Explication des différents choix de modélisations:
-    - Voir **ModelV1** pour la modélisation des données
-    - Voir **ModelTpSql** pour modifier la base du projet
+    - Voir [ModelV1] pour la modélisation des données
+    - Voir [ModelTpSql] pour modifier la base du projet
     - Le entités Student, Materials et Reservation ont été créé conformément aux descriptions dans le fichier de présentation du projet
     - Les asssociations sont de type 1,1 pour réservation car une réservation ne contient qu'un type de matériel et qu'un seul élève.
     - Les associations sont de type 0,n pour le reste car un étudiant peut avoir plusieurs réservation et un matériel peut être dans plusieurs réservations. 
