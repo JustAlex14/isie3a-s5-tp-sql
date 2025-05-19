@@ -32,6 +32,7 @@ CREATE TABLE Reservation(
    end_date DATE,
    Id_Student INT NOT NULL,
    Id_Materials INT NOT NULL,
+   quantity INT NOT NULL,
    PRIMARY KEY(Id_Reservation),
    FOREIGN KEY(Id_Student) REFERENCES Student(Id_Student),
    FOREIGN KEY(Id_Materials) REFERENCES Materials(Id_Materials)
@@ -40,6 +41,7 @@ CREATE TABLE Reservation(
 
 ### Code pour insérer les données:
 ``` sql
+-- Insert students
 -- Insert students
 INSERT INTO Student (Last_Name, Name, Mail) VALUES
 ('Smith', 'John', 'john.smith@example.com'),
@@ -58,12 +60,11 @@ INSERT INTO Materials (Name) VALUES
 
 -- Insert reservations
 INSERT INTO Reservation (start_date, end_date, Id_Student, Id_Materials) VALUES
-('2025-05-01', '2025-05-03', 1, 1), -- John reserves Laptop
-('2025-05-02', '2025-05-04', 2, 2), -- Emily reserves Projector
-('2025-05-05', '2025-05-06', 3, 3), -- Michael reserves Microscope
-('2025-05-07', '2025-05-10', 4, 4), -- Sarah reserves Camera
-('2025-05-08', '2025-05-12', 5, 5), -- David reserves 3D Printer
-('2025-05-10', '2025-05-13', 1, 2), -- John reserves Projector
-('2025-05-15', '2025-05-18', 2, 1); -- Emily reserves Laptop
-
+('2025-05-01', '2025-05-03', 1, 1, 1), -- John reserves 1 Laptop
+('2025-05-02', '2025-05-04', 2, 2, 2), -- Emily reserves 2 Projector
+('2025-05-05', '2025-05-06', 3, 3, 3), -- Michael reserves 3 Microscope
+('2025-05-07', '2025-05-10', 4, 4, 1), -- Sarah reserves 1 Camera
+('2025-05-08', '2025-05-12', 5, 5, 2), -- David reserves 2 3D Printer
+('2025-05-10', '2025-05-13', 1, 2, 1), -- John reserves 1 Projector
+('2025-05-15', '2025-05-18', 2, 1, 1); -- Emily reserves 1 Laptop
 ```
