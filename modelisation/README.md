@@ -59,7 +59,7 @@ INSERT INTO Materials (Name) VALUES
 ('3D Printer');
 
 -- Insert reservations
-INSERT INTO Reservation (start_date, end_date, Id_Student, Id_Materials) VALUES
+INSERT INTO Reservation (start_date, end_date, Id_Student, Id_Materials, quantity) VALUES
 ('2025-05-01', '2025-05-03', 1, 1, 1), -- John reserves 1 Laptop
 ('2025-05-02', '2025-05-04', 2, 2, 2), -- Emily reserves 2 Projector
 ('2025-05-05', '2025-05-06', 3, 3, 3), -- Michael reserves 3 Microscope
@@ -67,4 +67,32 @@ INSERT INTO Reservation (start_date, end_date, Id_Student, Id_Materials) VALUES
 ('2025-05-08', '2025-05-12', 5, 5, 2), -- David reserves 2 3D Printer
 ('2025-05-10', '2025-05-13', 1, 2, 1), -- John reserves 1 Projector
 ('2025-05-15', '2025-05-18', 2, 1, 1); -- Emily reserves 1 Laptop
+```
+
+### Code pour le select:
+``` sql
+Select * From materials where id_materials < 3;
+
+Select * From reservation where quantity < 3;
+
+Select * From student where id_student < 3;
+```
+
+### Code Select Ex3
+```sql
+Select student.last_name, student.name, materials.name, quantity from student
+Inner Join reservation on student.id_student = reservation.id_student
+Inner Join materials on reservation.id_materials = materials.id_materials;
+
+Select materials.name, quantity from student
+Inner Join reservation on student.id_student = reservation.id_student
+Inner Join materials on reservation.id_materials = materials.id_materials
+Where student.name = 'John';
+```
+
+### Code Select Ex4
+```sql
+Select Sum(quantity) as "Nombre de réservation" From reservation Where start_date >= '2025-05-01' And end_date <= '2025-05-10';
+
+Select Count(DISTINCT id_student) as "Nombre d'étudiant ayant emprunter du matériels" from reservation;
 ```
