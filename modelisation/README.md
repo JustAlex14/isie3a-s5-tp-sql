@@ -96,3 +96,40 @@ Select Sum(quantity) as "Nombre de réservation" From reservation Where start_da
 
 Select Count(DISTINCT id_student) as "Nombre d'étudiant ayant emprunter du matériels" from reservation;
 ```
+
+### Code Update Ex5
+```sql
+UPDATE reservation set quantity = 5
+where id_reservation = 8
+
+UPDATE reservation set quantity = 5
+where id_reservation in (
+	Select id_reservation from reservation 
+	where Current_Date Between start_date and end_date + interval '2 days'
+)
+```
+
+### Code Supprimer les données Ex6
+```sql
+Delete from reservation where id_reservation = 1;
+
+Delete from reservation where end_date < Current_Date;
+```
+
+### Code SELECT Ex7
+```sql
+SELECT Distinct name FROM student JOIN reservation ON student.id_student = reservation.id_student;
+
+SELECT Distinct name FROM materials Right OUTER JOIN reservation ON materials.id_materials = reservation.id_materials;
+
+Select name From materials 
+Inner Join reservation On materials.id_materials = reservation.id_materials
+Group by materials.name
+Having Count(Materials.id_materials) >= '3'
+
+Select distinct student.id_student, name from student 
+left JOIN reservation ON student.id_student = reservation.id_student
+Group by student.id_student
+Order By student.id_student
+
+```
