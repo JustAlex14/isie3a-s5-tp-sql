@@ -90,3 +90,26 @@ BEGIN
         );
     END LOOP;
 END $$;
+
+-- Requête de test avec jointures
+EXPLAIN ANALYZE
+SELECT r.id_reservation, s.name, m.name AS material_name, d.date_debut
+FROM reservation r
+JOIN student s ON r.id_student = s.id_student
+JOIN materials m ON r.id_materials = m.id_materials
+JOIN disponibilite d ON r.id_disponibilite = d.id_disponibilite
+WHERE d.date_debut = DATE '2025-06-15';
+
+-- Création d'index pour optimiser la requête
+CREATE INDEX idx_dispo_date_debut ON disponibilite(date_debut);
+CREATE INDEX idx_resa_id_student ON reservation(id_student);
+CREATE INDEX idx_resa_id_materials ON reservation(id_materials);
+CREATE INDEX idx_resa_id_disponibilite ON reservation(id_disponibilite);
+
+-- Extension pour LIKE sur les noms d’utilisateur
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE INDEX idx_student_name_gin ON student USING gin (name gin_trgm_ops);
+
+-- Requête avec LIKE
+EXPLAIN ANALYZE
+SELECT * FROM student WHERE name LIKE '%nom%1%';
